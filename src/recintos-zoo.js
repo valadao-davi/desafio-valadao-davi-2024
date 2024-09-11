@@ -69,9 +69,8 @@ class RecintosZoo {
     verificarAnimaisExistentes(listaRecintos, animalNome, alimentacaoAnimal){
 
         if(listaRecintos.animaisExistentes === "vazio") return 0; // se não há animais no recinto retorna o item como válido
-
         let espaçoExtra = 0 //inicia um valor de espaço extra que poderá ser acessado e utilizado posteriormente para cálculo de espaço disponível
-
+    
         const possuiUmCarnivoroDiferente = listaRecintos.animaisExistentes.some(animalExistente => // utiliza o método 'some' como uma verificação da lista de recintos
             //para retornar itens que são carnivoros, e que são especies diferentes do animal que será alocado
             animalExistente.alimentacao === "carnivora" && (animalExistente.nome !== animalNome && animalExistente !== "vazio")
@@ -138,7 +137,7 @@ class RecintosZoo {
                 const espacoExtra = this.verificarAnimaisExistentes(itemListaRecintos, animalObj.nome, animalObj.alimentacao) // 2 - passar por uma série de verificações sobre animais existentes nos recintos
                 if (espacoExtra === -1) return false; // 3 - ter animais carnívoros da mesma especie ou não ter animais carnivoros
                 if(itemListaRecintos.espacoDisponivel < espacoOcupar + espacoExtra) return false // 4 - ter tamanhos que sejam maiores que as quantidades atendidas
-
+                if(itemListaRecintos.animaisExistentes === "vazio" && (animalObj.nome == "MACACO" && quantidade == 1)) return false // 5 - recintos vazios para um macaco não são possíveis, pois não se sente confortaveis sozinhos
                 return true // se os itens passarem por todas essas condições serão passados para a lista final
             }) 
             // onde serão formatados com o formato desejado do teste do desafio
